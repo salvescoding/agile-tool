@@ -7,10 +7,21 @@ import PropTypes from 'prop-types';
 
 class Dashboard extends Component {
 	componentDidMount() {
-		this.props.getAllProjects();
+		this.setState({ projects: this.props.getAllProjects() });
 	}
 
 	render() {
+		const projects = this.props.project.projects.map(p => {
+			return (
+				<ProjectItem
+					key={p.id}
+					projectName={p.projectName}
+					projectIdentifier={p.projectIdentifier}
+					description={p.description}
+				/>
+			);
+		});
+
 		return (
 			<div className="projects">
 				<div className="container">
@@ -21,7 +32,7 @@ class Dashboard extends Component {
 							<CreateProjectButton />
 							<br />
 							<hr />
-							<ProjectItem />
+							{projects}
 						</div>
 					</div>
 				</div>
