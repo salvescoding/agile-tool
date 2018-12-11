@@ -21,7 +21,7 @@ export const getAllProjects = () => async dispatch => {
 	});
 };
 
-export const getProject = projectIdentifier => async dispatch => {
+export const getProject = (projectIdentifier, history) => async dispatch => {
 	const res = await axios.get(`http://localhost:8080/api/project/${projectIdentifier}`);
 	dispatch({
 		type: GET_PROJECT,
