@@ -26,7 +26,7 @@ class ProjectItem extends Component {
 										<i className="fa fa-edit pr-1"> Update Project Info</i>
 									</li>
 								</Link>
-								<a href="">
+								<a href="#">
 									<li className="list-group-item delete">
 										<i className="fa fa-minus-circle pr-1"> Delete Project</i>
 									</li>
