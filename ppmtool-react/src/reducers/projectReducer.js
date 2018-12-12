@@ -8,16 +8,19 @@ const initialState = {
 export default function(state = initialState, action) {
 	switch (action.type) {
 		case GET_PROJECTS:
+			console.log(action.payload);
 			return {
 				...state,
 				projects: action.payload,
 			};
 		case GET_PROJECT:
+			console.log(action.payload);
 			return {
 				...state,
 				project: action.payload,
 			};
 		case DELETE_PROJECT:
+			console.log(action.payload);
 			return {
 				...state,
 				projects: state.projects.filter(p => p.projectIdentifier !== action.payload),

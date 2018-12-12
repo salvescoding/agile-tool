@@ -46,8 +46,6 @@ class ProjectItem extends Component {
 }
 
 ProjectItem.propTypes = {
-	project: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired,
 	deleteProject: PropTypes.func.isRequired,
 };
 
