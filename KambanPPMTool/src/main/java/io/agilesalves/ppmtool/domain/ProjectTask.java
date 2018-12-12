@@ -17,7 +17,7 @@ public class ProjectTask {
     @NotBlank(message = "Please include a project summary")
     private String summary;
     private String acceptanceCriteria;
-    private String status;
+    private BacklogStatus status;
     private Integer priority;
     private Date dueDate;
     //ManyToOne with Backlog
@@ -66,11 +66,11 @@ public class ProjectTask {
         this.acceptanceCriteria = acceptanceCriteria;
     }
 
-    public String getStatus() {
+    public BacklogStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BacklogStatus status) {
         this.status = status;
     }
 
