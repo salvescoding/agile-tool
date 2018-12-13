@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ProjectTaskException extends RuntimeException {
+public class ProjectNotFoundException extends RuntimeException {
 
-    public ProjectTaskException(String message) {
+    public ProjectNotFoundException(String message) {
         super(message);
     }
 }

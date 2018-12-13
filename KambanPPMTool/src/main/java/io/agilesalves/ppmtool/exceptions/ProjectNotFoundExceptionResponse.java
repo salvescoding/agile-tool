@@ -1,10 +1,10 @@
 package io.agilesalves.ppmtool.exceptions;
 
-public class ProjectTaskExceptionResponse {
+public class ProjectNotFoundExceptionResponse {
 
     private String projectNotFound;
 
-    public ProjectTaskExceptionResponse(String projectNotFound) {
+    public ProjectNotFoundExceptionResponse(String projectNotFound) {
         this.projectNotFound = projectNotFound;
     }
 

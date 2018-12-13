@@ -4,14 +4,12 @@ package io.agilesalves.ppmtool.services;
 import io.agilesalves.ppmtool.domain.Backlog;
 import io.agilesalves.ppmtool.domain.BacklogStatus;
 import io.agilesalves.ppmtool.domain.ProjectTask;
-import io.agilesalves.ppmtool.exceptions.ProjectIdException;
-import io.agilesalves.ppmtool.exceptions.ProjectTaskException;
+import io.agilesalves.ppmtool.exceptions.ProjectNotFoundException;
 import io.agilesalves.ppmtool.repositories.BacklogRepository;
+import io.agilesalves.ppmtool.repositories.ProjectRepository;
 import io.agilesalves.ppmtool.repositories.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProjectTaskService {
@@ -21,6 +19,9 @@ public class ProjectTaskService {
 
     @Autowired
     private BacklogRepository backlogRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask) {
         try {
@@ -33,11 +34,14 @@ public class ProjectTaskService {
             projectTaskRepository.save(projectTask);
             return projectTask;
         } catch (Exception e) {
-            throw new ProjectTaskException("Project not found" );
+            throw new ProjectNotFoundException("Project not found" );
         }
     }
 
     public Iterable<ProjectTask> getAllProjectTasks(String projectIdentifier) {
+        if (projectRepository.findByProjectIdentifier(projectIdentifier) == null) {
+            throw new ProjectNotFoundException("The project with ID '"+projectIdentifier+"' does not exist");
+        }
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(projectIdentifier);
     }
 
