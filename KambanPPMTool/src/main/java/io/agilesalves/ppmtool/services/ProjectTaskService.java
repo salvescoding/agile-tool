@@ -5,6 +5,7 @@ import io.agilesalves.ppmtool.domain.Backlog;
 import io.agilesalves.ppmtool.domain.BacklogStatus;
 import io.agilesalves.ppmtool.domain.ProjectTask;
 import io.agilesalves.ppmtool.exceptions.ProjectNotFoundException;
+import io.agilesalves.ppmtool.exceptions.ProjectSequenceException;
 import io.agilesalves.ppmtool.repositories.BacklogRepository;
 import io.agilesalves.ppmtool.repositories.ProjectRepository;
 import io.agilesalves.ppmtool.repositories.ProjectTaskRepository;
@@ -45,6 +46,16 @@ public class ProjectTaskService {
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(projectIdentifier);
     }
 
+    public ProjectTask findByProjectSequence(String projectSequence) {
+        try {
+            ProjectTask projectTask = projectTaskRepository.findByProjectSequence(projectSequence);
+            return projectTask;
+        } catch (Exception e) {
+            throw new ProjectSequenceException("Project Sequence: '"+projectSequence+"' does not exist");
+        }
+
+    }
+
     private Integer setBacklogPTSequence(Backlog backlog) {
         Integer backlogSequence = backlog.getPTSequence();
         backlogSequence++;
@@ -68,6 +79,5 @@ public class ProjectTaskService {
         projectTask.setProjectSequence(projectIdentifier+"-"+backlogSequence);
         projectTask.setProjectIdentifier(projectIdentifier);
     }
-
 
 }
