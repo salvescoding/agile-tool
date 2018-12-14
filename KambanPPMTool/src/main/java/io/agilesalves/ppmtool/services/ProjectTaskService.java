@@ -53,7 +53,12 @@ public class ProjectTaskService {
         } catch (Exception e) {
             throw new ProjectSequenceException("Project Sequence: '"+projectSequence+"' does not exist");
         }
+    }
 
+    public void deleteProjectTaskByPTSequence(String projectSequence) {
+        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(projectSequence);
+        if (projectTask == null) throw new ProjectSequenceException("Project Sequence: '"+projectSequence+"' does not exist");
+        projectTaskRepository.delete(projectTask);
     }
 
     private Integer setBacklogPTSequence(Backlog backlog) {

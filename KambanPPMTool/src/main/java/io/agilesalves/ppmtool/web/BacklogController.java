@@ -45,6 +45,15 @@ public class BacklogController {
         return projectTaskService.findByProjectSequence(projectTaskSequence);
     }
 
+    @DeleteMapping("/{projectTaskSequence}")
+    public ResponseEntity<?> deleteProjectByProjectSequence(@PathVariable String projectTaskSequence) {
+        projectTaskService.deleteProjectTaskByPTSequence(projectTaskSequence);
+        return new ResponseEntity<String>("The Project Task with the sequence '"+projectTaskSequence+"' was deleted successfully",
+                HttpStatus.OK);
+    }
+
+
+
 
 
 }
