@@ -1,6 +1,7 @@
 package io.agilesalves.ppmtool.services;
 
 
+import io.agilesalves.ppmtool.domain.Project;
 import io.agilesalves.ppmtool.domain.ProjectTask;
 import io.agilesalves.ppmtool.exceptions.ProjectSequenceException;
 import org.junit.Before;
@@ -18,6 +19,8 @@ public class ProjectTaskServiceTest {
 
     private ProjectTaskService projectTaskService;
     private ProjectTask projectTask;
+    private Project project;
+
 
     @Before
     public void setUp() throws Exception {
@@ -25,11 +28,7 @@ public class ProjectTaskServiceTest {
         projectTask = new ProjectTask();
     }
 
-    @Test
-    public void shouldThrowExceptionWhenProjectSequenceDoesNotExist() {
-        projectTask.setProjectSequence("ID00-1");
-        assertThrows(ProjectSequenceException.class, () -> projectTaskService.findByProjectSequence("ID01-0"));
-    }
+
 
 
 

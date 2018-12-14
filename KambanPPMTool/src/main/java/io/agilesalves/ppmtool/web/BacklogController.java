@@ -1,7 +1,6 @@
 package io.agilesalves.ppmtool.web;
 
 
-import io.agilesalves.ppmtool.domain.Backlog;
 import io.agilesalves.ppmtool.domain.ProjectTask;
 import io.agilesalves.ppmtool.services.MapValidationErrorsService;
 import io.agilesalves.ppmtool.services.ProjectTaskService;
@@ -40,9 +39,20 @@ public class BacklogController {
         return projectTaskService.getAllProjectTasks(backlog_identifier);
     }
 
-    @GetMapping("/projectTask/{projectTaskSequence}")
-    public ProjectTask getProjectTaskByProjectSequence(@PathVariable String projectTaskSequence) {
-        return projectTaskService.findByProjectSequence(projectTaskSequence);
+    @GetMapping("/{backlogId}/{projectTaskSequence}")
+    public ProjectTask getProjectTaskByProjectSequence(@PathVariable String backlogId, @PathVariable String projectTaskSequence) {
+        return projectTaskService.findByProjectSequence(backlogId, projectTaskSequence);
+    }
+
+    @PatchMapping("{backlogId}/{projectTaskSequence}")
+    public ResponseEntity<?> udateProjectTask(@Valid @RequestBody ProjectTask updatedProjectTask,
+                                                     BindingResult result, @PathVariable String backlogId,
+                                                     @PathVariable String projectTaskSequence) {
+        ResponseEntity<?> errorsMap = mapValidationErrorsService.mapValidationError(result);
+        if (errorsMap != null) return errorsMap;
+
+        projectTaskService.updateProjectTask(updatedProjectTask, backlogId);
+        return new ResponseEntity<ProjectTask>(updatedProjectTask, HttpStatus.OK);
     }
 
     @DeleteMapping("/{projectTaskSequence}")
