@@ -3,7 +3,6 @@ package io.agilesalves.ppmtool.services;
 
 import io.agilesalves.ppmtool.domain.Backlog;
 import io.agilesalves.ppmtool.domain.BacklogStatus;
-import io.agilesalves.ppmtool.domain.Project;
 import io.agilesalves.ppmtool.domain.ProjectTask;
 import io.agilesalves.ppmtool.exceptions.ProjectNotFoundException;
 import io.agilesalves.ppmtool.exceptions.ProjectSequenceException;
@@ -59,16 +58,13 @@ public class ProjectTaskService {
 
     }
 
-    public ProjectTask updateProjectTask(ProjectTask updatedProjectTask, String backlogId) {
-        if (backlogRepository.findByProjectIdentifier(backlogId) == null) throw new ProjectNotFoundException("Backlog is invalid");
-
-        if (updatedProjectTask.getProjectIdentifier().equals(backlogId)) projectTaskRepository.save(updatedProjectTask);
-        return updatedProjectTask;
+    public ProjectTask updateProjectTask(ProjectTask updatedProjectTask, String backlogId, String projectTaskSequence) {
+        this.findByProjectSequence(backlogId, projectTaskSequence);
+        return projectTaskRepository.save(updatedProjectTask);
     }
 
-    public void deleteProjectTaskByPTSequence(String projectSequence) {
-        ProjectTask projectTask = projectTaskRepository.findByProjectSequence(projectSequence);
-        if (projectTask == null) throw new ProjectSequenceException("Project Sequence: '"+projectSequence+"' does not exist");
+    public void deleteProjectTaskByPTSequence(String backlogId, String projectSequence) {
+        ProjectTask projectTask = this.findByProjectSequence(backlogId, projectSequence);
         projectTaskRepository.delete(projectTask);
     }
 
