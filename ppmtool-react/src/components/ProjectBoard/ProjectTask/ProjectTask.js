@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 class ProjectTask extends Component {
 	render() {
 		return (
-			<div class="card mb-1 bg-light">
-				<div class="card-header text-primary" />
-				<div class="card-body bg-light">
-					<h5 class="card-title">project_task.summary</h5>
-					<p class="card-text text-truncate ">project_task.acceptanceCriteria</p>
-					<a href="#" class="btn btn-primary">
+			<div className="card mb-1 bg-light">
+				<div className="card-header text-primary" />
+				<div className="card-body bg-light">
+					<h4 className="card-title">{this.props.projectTask.summary}</h4>
+					<p className="card-text text-truncate ">{this.props.projectTask.acceptanceCriteria}</p>
+					<a href="#" className="btn btn-primary">
 						View / Update
 					</a>
 
-					<button class="btn btn-danger ml-4">Delete</button>
+					<button className="btn btn-danger ml-4">Delete</button>
 				</div>
 			</div>
 		);
