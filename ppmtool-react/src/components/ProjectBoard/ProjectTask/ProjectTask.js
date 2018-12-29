@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ProjectTask extends Component {
 	render() {
@@ -8,9 +9,14 @@ class ProjectTask extends Component {
 				<div className="card-body bg-light">
 					<h4 className="card-title">{this.props.projectTask.summary}</h4>
 					<p className="card-text text-truncate ">{this.props.projectTask.acceptanceCriteria}</p>
-					<a href="#" className="btn btn-primary">
-						View / Update
-					</a>
+					<Link
+						to={`/updateProjectTask/${this.props.projectTask.projectIdentifier}/${
+							this.props.projectTask.projectSequence
+						}`}
+						className="btn btn-primary"
+					>
+						View/ Update
+					</Link>
 
 					<button className="btn btn-danger ml-4">Delete</button>
 				</div>

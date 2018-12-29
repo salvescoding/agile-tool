@@ -9,6 +9,7 @@ import store from './store';
 import UpdateProject from './components/Project/UpdateProject';
 import ProjectBoard from './components/ProjectBoard/ProjectBoard';
 import AddProjectTask from './components/ProjectBoard/ProjectTask/AddProjectTask';
+import UpdateProjectTask from './components/ProjectBoard/ProjectTask/UpdateProjectTask';
 
 class App extends Component {
 	render() {
@@ -22,6 +23,7 @@ class App extends Component {
 						<Route exact path="/updateProject/:id" component={UpdateProject} />
 						<Route exact path="/projectBoard/:id" component={ProjectBoard} />
 						<Route exact path="/addProjectTask/:id" component={AddProjectTask} />
+						<Route exact path="/updateProjectTask/:id/:id" component={UpdateProjectTask} />
 					</div>
 				</Router>
 			</Provider>
