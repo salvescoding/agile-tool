@@ -28,6 +28,7 @@ public class ProjectController {
         ResponseEntity<?> mapErrors =  mapValidationErrorsService.mapValidationError(result);
         if (mapErrors != null) return mapErrors;
 
+
         projectService.saveOrUpdate(project);
         return new ResponseEntity<Project>(project, HttpStatus.CREATED);
     }
