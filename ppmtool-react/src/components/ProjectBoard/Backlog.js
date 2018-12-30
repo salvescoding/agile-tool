@@ -13,7 +13,6 @@ class Backlog extends Component {
 		let doneItems = [];
 
 		tasks.forEach(task => {
-			console.log(task);
 			switch (task.props.projectTask.status) {
 				case 'TODO':
 					todoItems.push(task);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_BACKLOG, GET_ERRORS, GET_PROJECT_TASK } from './types';
+import { GET_BACKLOG, GET_ERRORS, GET_PROJECT_TASK, DELETE_PROJECT_TASK } from './types';
 
 export const getBacklog = backlogIdentifier => async dispatch => {
 	try {
@@ -66,4 +66,12 @@ export const updateProjectTask = (
 			payload: error.response.data,
 		});
 	}
+};
+
+export const deleteProjectTask = (backlogIdentifier, projectTaskSequence) => async dispatch => {
+	await axios.delete(`/api/backlog/${backlogIdentifier}/${projectTaskSequence}`);
+	dispatch({
+		type: DELETE_PROJECT_TASK,
+		payload: projectTaskSequence,
+	});
 };
